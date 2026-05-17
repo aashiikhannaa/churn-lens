@@ -235,10 +235,8 @@ if page == "Predict":
             ax.set_xticklabels(['0%', '25%', '50%', '75%', '100%'], fontsize=8)
             for spine in ax.spines.values():
                 spine.set_visible(False)
-            label_x = min(prob_pct + 2, 88)
-            ax.text(label_x, 0, f'{prob_pct:.1f}%',
-                    va='center', fontsize=12, color=bar_color, fontweight='600')
-            ax.set_title('Churn Probability', fontsize=9, color='#555550', pad=8, loc='left')
+            ax.set_title(f'Churn Probability — {prob_pct:.1f}%', fontsize=10,
+                        color=bar_color, pad=10, loc='left', fontweight='600')
             plt.tight_layout(pad=0.3)
             st.pyplot(fig_g, use_container_width=True)
             plt.close()
@@ -274,8 +272,10 @@ if page == "Predict":
                 spine.set_color('#2a2a28')
             red_p   = mpatches.Patch(color='#f87171', label='↑ Increases churn risk')
             green_p = mpatches.Patch(color='#4ade80', label='↓ Reduces churn risk')
-            ax2.legend(handles=[red_p, green_p], fontsize=7, loc='upper right', 
-                        frameon=True, facecolor='#1a1a18', edgecolor='#2a2a28')
+            ax2.legend(handles=[red_p, green_p], fontsize=7,
+                        loc='upper center', bbox_to_anchor=(0.5, -0.18),
+                        ncol=2, frameon=False)
+            plt.subplots_adjust(bottom=0.2)
             plt.tight_layout(pad=0.5)
             st.pyplot(fig_s, use_container_width=True)
             plt.close()
